@@ -5,7 +5,6 @@ Libraries
 ```{r  Libraries  }
 library(readr)
 library(forecast)
-
 ```
 In this exercise, I analyzed the IBM stock adjusted close price in the period of [2017-01-01/2021-12-10] to create a time series forecasting models (naïve  , Seasonal naïve, ETS,ARIMA, Neural Network), then check which returned the best forecasting results the test period of the last 7 month of the data period. Data from is **<a href="https://finance.yahoo.com/quote/IBM/history/" target="_blank">Yahoo Finance</a>** .
 
@@ -27,7 +26,6 @@ IBM.ts <- ts(IBM$`Adj Close`
              , frequency = 12)
 
 autoplot(IBM.ts)
-
 ```
 
 ## Traingin Testing split
@@ -47,20 +45,16 @@ I generated a naive model and I checked the performance for the model forecastin
 naive.fit = naive(train)
 naive.forecast = forecast(naive.fit, h = 7)
 summary(naive.fit)
-
 ```
 
 ```{r               }
 checkresiduals(naive.forecast)
 accuracy(naive.forecast, test)
-
 ```
 ```{r}
-
 autoplot(IBM.ts) +
   autolayer(naive.forecast, series = "naive Forecast") +
   autolayer(test , series = "Actual price")
-
 ```
 
 ## Seasonal naïve Model
@@ -70,20 +64,16 @@ Now I generated a Seasonal naive model and I checked the performance for the mod
 snaive.fit = snaive(train)
 snaive.forecast = forecast(snaive.fit, h = 7)
 summary(snaive.fit)
-
 ```
 ```{r               }
 checkresiduals(snaive.forecast)
 accuracy(snaive.forecast, test)
-
 ```
 
 ```{r}
-
 autoplot(IBM.ts) +
   autolayer(snaive.forecast, series = "snaive Forecast") +
   autolayer(test , series = "Actual price" )
-
 ```
 
 ## ETS Model
@@ -93,19 +83,16 @@ In the subsequent model iteration, I generated a Error, Trend, Seasonal model an
 ETS.fit = ets(train)
 ETS.forecast = forecast(ETS.fit, h = 7)
 summary(ETS.fit)
-
 ```
 ```{r               }
 checkresiduals(ETS.forecast)
 accuracy(ETS.forecast, test)
-
 ```
 
 ```{r               }
 autoplot(IBM.ts) +
   autolayer(ETS.forecast, series = "ETS Forecast") +
   autolayer(test , series = "Actual price")
-
 ```
 
 ## ARIMA Model
@@ -115,19 +102,16 @@ Next I implemented, an ARIMA Model and I checked the performance for the model, 
 ARIMA.fit = auto.arima(train)
 ARIMA.forecast = forecast(ARIMA.fit, h = 7)
 summary(ARIMA.fit)
-
 ```
 ```{r               }
 checkresiduals(ARIMA.forecast)
 accuracy(ARIMA.forecast, test)
-
 ```
 
 ```{r               }
 autoplot(IBM.ts) +
   autolayer(ARIMA.forecast, series = "ARIMA Forecast") +
   autolayer(test , series = "Actual price")
-
 ```
 
 ##  Neural Network Model
@@ -155,14 +139,12 @@ accuracy(nn.forecast, test)
 autoplot(IBM.ts) +
   autolayer(nn.forecast, series = "Neural Network Forecast") +
   autolayer(test , series = "Actual price")
-
 ```
 
 ## Conclusion
 
 ```{r  Conclusion   }
 data.frame(Model = c("1.naive modlel", "2.snaive model", "3.ETS model", "4.ARIMA model", "5.Neural Network"), "RMSE" = c(8.048907,14.93724 ,10.320349,5.452839,9.559687), "MASE" = c(0.5629862,1.009509,0.7658349,0.3730515,0.6892889))
-
 ```
 
 **Ultimately, the ARIMA model returned the best results (MASE = 0.3730515 and RMSE = 5.452839), when we compare it to the actual test data, So we can choose the ARIMA model among these models to forecast the future IBM adjusted stock price.**
