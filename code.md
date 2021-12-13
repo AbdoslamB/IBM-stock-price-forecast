@@ -6,11 +6,10 @@ Libraries
 library(readr)
 library(forecast)
 ```
-In this exercise, I analyzed the IBM stock adjusted close price in the period of [2017-01-01/2021-12-10] to create a time series forecasting models (naïve  , Seasonal naïve, ETS,ARIMA, Neural Network), then check which returned the best forecasting results the test period of the last 7 month of the data period. Data from is **<a href="https://finance.yahoo.com/quote/IBM/history/" target="_blank">Yahoo Finance</a>** .
+In this exercise, I analyzed the IBM stock adjusted close price in the period of [2017-01-01/2021-12-10] to create a time series forecasting models (naïve  , Seasonal naïve, ETS,ARIMA, Neural Network), then I checked which model returned the best forecasting results the test period of the last 7 month of the data period. Data from is **<a href="https://finance.yahoo.com/quote/IBM/history/" target="_blank">Yahoo Finance</a>** .
 
 
 ## Loading the Data
-
  
 ```{r loaud the data}
 IBM <- read_csv("C:/Users/baaba/Desktop/MS. Applied Economic and Data analysis/ADEC7460.02 Fall 2021 Predictive AnalyticsForecasting [Fulton]/Module 6 VAR, Panel, HTS, Machine Learning 25 Nov -5 Dec/Assignment Homework Time Series/IBM.csv")
