@@ -18,7 +18,7 @@ IBM <- read_csv("C:/Users/baaba/Desktop/MS. Applied Economic and Data analysis/A
 head(IBM)
 summary(IBM)
 ```
-plot the data 
+plotting the data 
 ```{r               }
 IBM.ts <- ts(IBM$`Adj Close`
              , start = c(2016,01)
