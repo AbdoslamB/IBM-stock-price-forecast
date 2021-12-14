@@ -1,15 +1,12 @@
-# In this exercise, I analyzed the IBM stock adjusted close price in the period of [2017-01-01/2021-12-10] to create a time series forecasting models (naïve , Seasonal naïve, ETS,ARIMA, Neural Network), then check which returned the best forecasting results the test period of the last 7 month of the data period. Data from is Yahoo Finance .
+# In this exercise, I analyzed the IBM stock adjusted close price in the period of [2017-01-01/2021-12-10] to create a time series forecasting models (naÃ¯ve , Seasonal naÃ¯ve, ETS,ARIMA, Neural Network), then check which returned the best forecasting results the test period of the last 7 month of the data period. Data from is Yahoo Finance .
   
 # Libraries
 library(readr)
 library(forecast)
 
-# In this exercise, I analyzed the IBM stock adjusted close price in the period of [2017-01-01/2021-12-10] to create a time series forecasting models (naïve  , Seasonal naïve, ETS,ARIMA, Neural Network), then check which returned the best forecasting results the test period of the last 7 month of the data period.
-
+# In this exercise, I analyzed the IBM stock adjusted close price in the period of [2017-01-01/2021-12-10] to create a time series forecasting models (naÃ¯ve  , Seasonal naÃ¯ve, ETS,ARIMA, Neural Network), then check which returned the best forecasting results the test period of the last 7 month of the data period.
 
 ## Loading the Data
-
-
 IBM <- read_csv("C:/Users/baaba/Desktop/MS. Applied Economic and Data analysis/ADEC7460.02 Fall 2021 Predictive AnalyticsForecasting [Fulton]/Module 6 VAR, Panel, HTS, Machine Learning 25 Nov -5 Dec/Assignment Homework Time Series/IBM.csv")
 
 head(IBM)
@@ -26,7 +23,6 @@ autoplot(IBM.ts)
 
 
 ## Training Testing split
-
 # After loading data from Yahoo finance I split the data set into a training set from 2016,1 to 2021 and test set from 2021,6 to the end of data period.
 # training sets   
 train = window(IBM.ts, end = c(2021,5))
@@ -34,9 +30,8 @@ train = window(IBM.ts, end = c(2021,5))
 test = window(IBM.ts, start = c(2021,6)) # 7 months test set
 
 
-## naïve Model
-
-#I generated a naive model and I checked the performance for the model forecasting on the test set. The naive model generated a MASE = 1.2720367 and a RMSE = 17.736403. Next we need to compare it with the other models.
+## NaÃ¯ve Model
+# I generated a naive model and I checked the performance for the model forecasting on the test set. The naive model generated a MASE = 1.2720367 and a RMSE = 17.736403. Next we need to compare it with the other models.
 naive.fit = naive(train)
 naive.forecast = forecast(naive.fit, h = 7)
 summary(naive.fit)
@@ -52,9 +47,8 @@ autoplot(IBM.ts) +
 
 
 
-##Seasonal naïve Model####
-
-#Now I generated a Seasonal naive model and I checked the performance for the model forecasting on the test set. The Seasonal naive model generated a MASE = 1.009509 and a RMSE = 14.93724.  the Seasonal naive model has worst RMSE and MASE than the naive model in this data,  we will compare these models  to check how good the next models are.  
+## Seasonal naÃ¯ve Model####
+# Now I generated a Seasonal naive model and I checked the performance for the model forecasting on the test set. The Seasonal naive model generated a MASE = 1.009509 and a RMSE = 14.93724.  the Seasonal naive model has worst RMSE and MASE than the naive model in this data,  we will compare these models  to check how good the next models are.  
 
 snaive.fit = snaive(train)
 snaive.forecast = forecast(snaive.fit, h = 7)
@@ -71,8 +65,7 @@ autoplot(IBM.ts) +
 
 
 ## ETS Model####
-
-#In the subsequent model iteration, I generated a Error, Trend, Seasonal model and I checked the performance for the model forecasting on the test set. The ETS Model generated a MASE = 0.7658349 and a RMSE = 10.320349. Although the Seasonal naive model looks much better in the graph but the ETS model has better MASE and  RMSE than the Seasonal naive model.
+# In the subsequent model iteration, I generated a Error, Trend, Seasonal model and I checked the performance for the model forecasting on the test set. The ETS Model generated a MASE = 0.7658349 and a RMSE = 10.320349. Although the Seasonal naive model looks much better in the graph but the ETS model has better MASE and  RMSE than the Seasonal naive model.
 
 ETS.fit = ets(train)
 ETS.forecast = forecast(ETS.fit, h = 7)
@@ -88,9 +81,8 @@ autoplot(IBM.ts) +
   autolayer(test , series = "Actual price")
 
 
-## ARIMA Model####
-
-#Next I implemented, an ARIMA Model and I checked the performance for the model, and the model   returned a MASE = 0.3730515  and a RMSE = 5.452839 , the ARIMA Model is better than the ETS model for this data.
+## ARIMA Model
+# Next I implemented, an ARIMA Model and I checked the performance for the model, and the model   returned a MASE = 0.3730515  and a RMSE = 5.452839 , the ARIMA Model is better than the ETS model for this data.
 
 ARIMA.fit = auto.arima(train)
 ARIMA.forecast = forecast(ARIMA.fit, h = 7)
@@ -106,8 +98,8 @@ autoplot(IBM.ts) +
   autolayer(test , series = "Actual price")
 
 
-##  Neural Network Model####
-#Next I tried to use the Neural Network Model to see if it can generate better performance that the other models. For the Neural Network Model I got a MASE = 0.4623200 and RMSE = 7.424988 . the Neural Network Model performance for this data is lower than the ARIMA models.
+##  Neural Network Model
+# Next I tried to use the Neural Network Model to see if it can generate better performance that the other models. For the Neural Network Model I got a MASE = 0.4623200 and RMSE = 7.424988 . the Neural Network Model performance for this data is lower than the ARIMA models.
 
 library(forecast)
 nn.fit = nnetar(train, lambda=0)
@@ -134,7 +126,7 @@ autoplot(IBM.ts) +
 
 
 
-## Conclusion####
+## Conclusion
 
 data.frame(Model = c("1.naive modlel", "2.snaive model", "3.ETS model", "4.ARIMA model", "5.Neural Network"), "RMSE" = c(8.048907,14.93724 ,10.320349,5.452839,9.559687), "MASE" = c(0.5629862,1.009509,0.7658349,0.3730515,0.6892889))
 
