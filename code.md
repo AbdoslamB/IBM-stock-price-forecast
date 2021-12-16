@@ -18,7 +18,7 @@ head(IBM)
 summary(IBM)
 ```
 plotting the data 
-```{r               }
+```{r  }
 IBM.ts <- ts(IBM$`Adj Close`
              , start = c(2016,01)
              , end = c(2021,12)
@@ -46,7 +46,7 @@ naive.forecast = forecast(naive.fit, h = 7)
 summary(naive.fit)
 ```
 
-```{r               }
+```{r        }
 checkresiduals(naive.forecast)
 accuracy(naive.forecast, test)
 ```
@@ -59,12 +59,12 @@ autoplot(IBM.ts) +
 ## Seasonal naïve Model
 
 Now I generated a Seasonal naive model and I checked the performance for the model forecasting on the test set. The Seasonal naive model generated a MASE = 1.009509 and a RMSE = 14.93724.  the Seasonal naive model has worst RMSE and MASE than the naive model in this data,  we will compare these models  to check how good the next models are.  
-```{r               }
+```{r           }
 snaive.fit = snaive(train)
 snaive.forecast = forecast(snaive.fit, h = 7)
 summary(snaive.fit)
 ```
-```{r               }
+```{r           }
 checkresiduals(snaive.forecast)
 accuracy(snaive.forecast, test)
 ```
@@ -83,12 +83,12 @@ ETS.fit = ets(train)
 ETS.forecast = forecast(ETS.fit, h = 7)
 summary(ETS.fit)
 ```
-```{r               }
+```{r           }
 checkresiduals(ETS.forecast)
 accuracy(ETS.forecast, test)
 ```
 
-```{r               }
+```{r           }
 autoplot(IBM.ts) +
   autolayer(ETS.forecast, series = "ETS Forecast") +
   autolayer(test , series = "Actual price")
@@ -102,12 +102,12 @@ ARIMA.fit = auto.arima(train)
 ARIMA.forecast = forecast(ARIMA.fit, h = 7)
 summary(ARIMA.fit)
 ```
-```{r               }
+```{r            }
 checkresiduals(ARIMA.forecast)
 accuracy(ARIMA.forecast, test)
 ```
 
-```{r               }
+```{r            }
 autoplot(IBM.ts) +
   autolayer(ARIMA.forecast, series = "ARIMA Forecast") +
   autolayer(test , series = "Actual price")
@@ -129,12 +129,12 @@ ggplot2::autoplot(train) + forecast::autolayer(sim)
 
 nn.forecast <- forecast(nn.fit, PI=TRUE, h=7)
 ```
-```{r               }
+```{r           }
 checkresiduals(nn.forecast)
 accuracy(nn.forecast, test)
 ```
 
-```{r               }
+```{r           }
 autoplot(IBM.ts) +
   autolayer(nn.forecast, series = "Neural Network Forecast") +
   autolayer(test , series = "Actual price")
