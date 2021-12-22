@@ -4,7 +4,7 @@ In this exercise, I analyzed the IBM stock adjusted close price. I checked which
 
 The IBM stock adjusted prices are from <a href="https://finance.yahoo.com/quote/IBM/history/" target="_blank">Yahoo Finance</a> .
 
-###  Models
+### Models
 - Naïve
 - Seasonal Naïve
 - ETS
