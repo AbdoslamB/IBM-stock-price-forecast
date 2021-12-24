@@ -37,7 +37,7 @@ train = window(IBM.ts, end = c(2021,5))
 test = window(IBM.ts, start = c(2021,6)) # 7 months test set
 ```
 
-## naïve Model
+## Naïve Model
 
 I generated a naive model and I checked the performance for the model forecasting on the test set. The naive model generated a MASE = 1.2720367 and a RMSE = 17.736403. Next we need to compare it with the other models.
 ```{r    naïve    }
