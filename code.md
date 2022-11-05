@@ -106,7 +106,6 @@ summary(ARIMA.fit)
 checkresiduals(ARIMA.forecast)
 accuracy(ARIMA.forecast, test)
 ```
-
 ```{r            }
 autoplot(IBM.ts) +
   autolayer(ARIMA.forecast, series = "ARIMA Forecast") +
@@ -139,11 +138,9 @@ autoplot(IBM.ts) +
   autolayer(nn.forecast, series = "Neural Network Forecast") +
   autolayer(test , series = "Actual price")
 ```
-
 ## Conclusion
 
 ```{r  Conclusion   }
 data.frame(Model = c("1.naive modlel", "2.snaive model", "3.ETS model", "4.ARIMA model", "5.Neural Network"), "RMSE" = c(8.048907,14.93724 ,10.320349,5.452839,9.559687), "MASE" = c(0.5629862,1.009509,0.7658349,0.3730515,0.6892889))
 ```
-
 **Ultimately, the ARIMA model returned the best results (MASE = 0.3730515 and RMSE = 5.452839), when we compare it to the actual test data, So we can choose the ARIMA model among these models to forecast the future IBM adjusted stock price.**
